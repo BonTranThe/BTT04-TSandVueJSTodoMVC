@@ -37,6 +37,7 @@
               :class="{ checked: todo.status === true }"
               :value="todo.content"
               :id="index"
+              autocomplete="off"
               @dblclick="editTodo(index)"
               @keyup.enter="doneEdit(todo, index)"
               @blur="doneEdit(todo, index)"
@@ -59,7 +60,7 @@
           ><strong>{{ remaining }} </strong>
           <span class="item_left"
             >{{
-              remaining === 0 || remaining === 1 ? " item" : " items"
+              remaining > 1 ? " items" : " item"
             }}
             left</span
           ></span
@@ -101,6 +102,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+
 interface Todo {
   id: number
   content: string
@@ -280,13 +282,22 @@ export default defineComponent({
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-#todoapp {
-  max-width: 500px;
-  margin: 0 auto;
+<style>
+body {
+  background: rgb(236, 220, 220);
+}
+
+#app {
+  max-width: 550px;
   background: #fff;
   border-radius: 7px;
+  margin: 0 auto;
+}
+
+#todoapp {
+  max-width: 500px;
+  background: #fff;
+  margin: 0 auto;
 }
 
 .first-title {
@@ -304,6 +315,7 @@ export default defineComponent({
   max-width: 100%;
   display: flex;
   justify-content: space-between;
+  padding-bottom: 20px;
 }
 
 .new-todo {
